@@ -4,13 +4,21 @@
 
 [Cipher decoder ring NEED TO DEPLOY ](https://reservations-anyamg.vercel.app/)  
 
-## Application Summary:
+## Application summary:
 
 A two-way cipher encoding/decoding app for three different ciphers (Caesar, Polybius, and Substitution), as well as accompanying self-implemented test cases for each of the ciphers using Mocha and Chai. Each function takes in a string that satisfies a specific set of criteria and returns an encoded or decoded string based on the user's selection.
 
-## Caesar Shift
+## Screenshots:
 
-![Caesar shift](https://github.com/Thinkful-Ed/project-decoder-ring/blob/master/docs/home.png?raw=true)
+![Application screenshot](https://raw.githubusercontent.com/Thinkful-Ed/project-decoder-ring/master/docs/home.png)
+
+## Tech stack:
+
+This application was created using JavaScript, BootStrap, HTML, CSS, Mocha, and Chai.
+
+## Caesar Shift:
+
+![Caesar shift](https://github.com/Thinkful-Ed/project-decoder-ring/blob/master/docs/caesar.png?raw=true)
 
 The Caesar Shift is a type of substitution cipher originally used by Julius Caesar to protect messages of military significance. It relies on taking the alphabet and "shifting" letters to the right or left, based on the typical alphabetic order.
 
@@ -24,7 +32,7 @@ The `caesar()` function in the `src/caesar.js` file has three parameters:
 - _shift_ is an integer refers to how much each letter is "shifted" by. A positive number means shifting to the right (i.e. "A" becomes "D") whereas a negative number means shifting to the left (i.e. "M" becomes "K"). If there is no _shift_ value, the function will return `false`.
 - _encode_ is a boolean that refers to whether you should encode or decode the message. By default, it is set to `true`. Encoding is case-insensitive (e.g., both "a" or "A" would be encoded to the same result).
 
-The following also holds true:
+The following should also hold true:
 
 - If a letter is shifted so that it goes "off" the alphabet (e.g. a shift of 3 on the letter "z"), it will wrap around to the front of the alphabet (e.g. "z" becomes "c").
 - Spaces, as well as other non-alphabetic symbols, will be maintained before and after encoding or decoding.
@@ -44,7 +52,7 @@ caesar("thinkful", 99); //> false
 caesar("thinkful", -26); //> false
 ```
 
-## Polybius Square
+## Polybius Square:
 
 |       | **1** | **2** | **3** | **4** | **5** |
 | ----- | ----- | ----- | ----- | ----- | ----- |
@@ -64,18 +72,17 @@ In this app, the grid will be arranged as above and coordinates will be read by 
 
 When decoding the message, each pair of numbers is translated using the coordinates.
 
-#### polybius()
+### polybius()
 
 The `polybius()` function in the `src/polybius.js` file has two parameters:
 
-- _input_ is a string that refers to the inputted text to be encoded or decoded.
-- _encode_ is a boolean that refers to whether you should encode or decode the message. By default it is set to `true`.
+- _input_ is a string that refers to the inputted text to be encoded or decoded. The input may only contain spaces and letters.
+- _encode_ is a boolean that refers to whether you should encode or decode the message. By default it is set to `true`. Encoding is case-insensitive (e.g., both "a" or "A" would be encoded to the same result).
 
 The following should also hold true:
 
 - When decoding, the number of characters in the string _excluding spaces_ should be even. Otherwise, the function will return `false`.
 - Spaces in the message will be maintained before and after encoding or decoding.
-- Encoding is case-insensitive (e.g., both "a" or "A" would be encoded to the same result).
 - The letters "I" and "J" share a space. When encoding, both letters can be converted to `42`, but when decoding, both letters will be shown as `"(i/j)"`.
 
 #### Examples
@@ -88,11 +95,63 @@ polybius("3251131343 2543241341", false); //> "hello world"
 polybius("4432423352125413", false); //> "th(i/j)nkful
 polybius("44324233521254134", false); //> false
 ```
-------------------- THIS PART STILL NEED WORK--------------------------------
 
-### polybius()
+## Substitution Cipher:
 
-The `polybius()` function in the `src/polybius.js` file has two parameters:
+![Substitution cipher](https://github.com/Thinkful-Ed/project-decoder-ring/blob/master/docs/substitution.jpeg?raw=true)
 
-- _input_ is a string that refers to the inputted text to be encoded or decoded. The input may only contain spaces and letters.
-- _encode_ is a boolean that refers to whether you should encode or decode the message. By default it is set to `true`. Encoding is case-insensitive (e.g., both "a" or "A" would be encoded to the same result).
+The Substitution Cipher requires a standard alphabet and a substitution alphabet. Letters from the standard alphabet will be transposed to the standard alphabet. This cipher requires that the recipient have the substitution alphabet; otherwise, it will be difficult for them to decode the message.
+
+For example, in the image above, the word "HELLO" would be translated as follows:
+
+- "H" becomes "R".
+- "E" becomes "M".
+- "L" becomes "W".
+- "O" becomes "L".
+
+This would result in the code "RMWWL". To decrypt this code, you would simply take the result and transpose back from the substitution alphabet to the standard alphabet.
+
+### substitution()
+
+The `substitution()` function in the `src/substitution.js` file has three parameters:
+
+- _input_ is a string that refers to the inputted text to be encoded or decoded; only letters and spaces may be included.
+- _alphabet_ is a string that refers to substitution alphabet.
+- _encode_ is a boolean that refers to whether you should encode or decode the message. By default, it is set to `true`.
+
+The following should also hold true:
+
+- Spaces in the message should be maintained before and after encoding or decoding.
+- Encoding/decoding is case-insensitive (e.g., both "a" or "A" would be encoded to the same result).
+- The `alphabet` parameter must be a string of exactly 26 characters. Otherwise, it will return `false`.
+- All of the characters in the `alphabet` parameter _must be unique._ Otherwise, it will return `false`.
+
+#### Examples
+
+```js
+substitution("thinkful", "xoyqmcgrukswaflnthdjpzibev"); //> 'jrufscpw'
+substitution("You are an excellent spy", "xoyqmcgrukswaflnthdjpzibev"); //> 'elp xhm xf mbymwwmfj dne'
+substitution("jrufscpw", "xoyqmcgrukswaflnthdjpzibev", false); //> 'thinkful'
+
+substitution("thinkful", "short"); //> false
+substitution("thinkful", "abcabcabcabcabcabcabcabcyz"); //> false
+```
+
+## Installation:
+
+- Run `npm install` to install the dependencies needed for this project.
+
+To run the tests, you can run the following command:
+
+```bash
+npm test
+```
+
+To watch how the code you write affects the application website, you can run the following command, which will start a server and take over your terminal window:
+
+```bash
+npm start
+```
+
+To stop the server and regain control of your terminal, you can press `Ctrl + C`.
+
