@@ -2,7 +2,7 @@
 
 ## Live demo:
 
-[Cipher decoder ring NEED TO DEPLOY ](https://reservations-anyamg.vercel.app/)  
+[Deployed  cipher decoder ring temp placeholder ](https://vercel.app/)  
 
 ## Application summary:
 
